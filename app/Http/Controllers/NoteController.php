@@ -90,7 +90,7 @@ class NoteController extends Controller
             $note->categories()->sync($request->categories);
         }
 
-        return to_route('dashboard')->with('success', 'Record successfully updated.');
+        return to_route('notes.index')->with('success', 'Record successfully updated.');
     }
 
 
@@ -99,7 +99,9 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
-        //
+        $note->delete();
+
+        return to_route('notes.index')->with('success', 'Record successfully deleted');
     }
 
     public function trash()
