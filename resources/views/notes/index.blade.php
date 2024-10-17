@@ -131,14 +131,14 @@
                             <tr>
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <div class="flex items-center gap-3">
-                                        <img src="{{$note->image ? asset('storage/' . $note->image) : asset('images/default.jpg') }}"
+                                        <img src="{{ $note->image ? asset('storage/' . $note->image) : asset('images/default.jpg') }}"
                                             alt="{{ $note->title }}"
                                             class="relative inline-block h-20 w-20 !rounded-md object-cover object-center" />
                                         <div class="flex flex-col">
-                                            <p
+                                            <a href="{{ route('notes.show', $note) }}"
                                                 class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                 {{ Str::limit($note->title, 40) }}
-                                            </p>
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
