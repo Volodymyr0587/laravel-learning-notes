@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('link_to_tutorial');
             $table->string('link_to_resource')->nullable();
+            $table->string('resource_name')->nullable();
             $table->enum('resource_type', array_column(ResourceType::cases(), 'value'))->nullable();
             $table->text('description')->nullable();
             $table->string('project_folder')->nullable();
