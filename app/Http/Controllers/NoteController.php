@@ -13,7 +13,8 @@ class NoteController extends Controller
      */
     public function index()
     {
-        //
+        $notes = auth()->user()->notes()->paginate(2);
+        return view('notes.index', compact('notes'));
     }
 
     /**
