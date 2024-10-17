@@ -36,7 +36,7 @@
                             <div class="lg:pr-4">
                                 <div class="lg:max-w-lg">
                                     <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">{{ $note->resource_type }}</span>
-                                    <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium {{ $note->completed ? 'bg-green-50 text-green-700 ring-green-600/20' : 'bg-yellow-50 text-yellow-700 ring-yellow-600/20' }} ring-1 ring-inset">{{ $note->completed ? 'Completed' : 'In progress' }}</span>
+                                    <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium {{ $note->completed ? 'bg-green-50 text-green-700 ring-green-600/20' : 'bg-yellow-50 text-yellow-700 ring-yellow-600/20' }} ring-1 ring-inset">{{ $note->completed ? 'completed' : 'in progress' }}</span>
                                     <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ $note->title }}</h1>
                                 </div>
                             </div>

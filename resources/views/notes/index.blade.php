@@ -115,7 +115,7 @@
                                 <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
                                     <p
                                         class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Updated
+                                        Updated at
                                     </p>
                                 </th>
                                 <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
@@ -135,9 +135,11 @@
                                             alt="{{ $note->title }}"
                                             class="relative inline-block h-20 w-20 !rounded-md object-cover object-center" />
                                         <div class="flex flex-col">
-                                            <a href="{{ route('notes.show', $note) }}"
-                                                class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                                            <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                                 {{ Str::limit($note->title, 40) }}
+                                            </p>
+                                            <a href="{{ route('notes.show', $note) }}" class="block font-sans text-sm antialiased font-normal leading-normal text-blue-500 hover:text-blue-900 opacity-70">
+                                                View
                                             </a>
                                         </div>
                                     </div>
@@ -154,7 +156,7 @@
                                     <div class="w-max">
                                         <div
                                             class="relative grid items-center px-2 py-1 font-sans text-xs font-bold {{ $note->completed ? 'text-green-900 bg-green-500/20' : 'text-yellow-900 bg-yellow-500/20' }} uppercase rounded-md select-none whitespace-nowrap ">
-                                            <span class="">{{ $note->completed ? 'completed' : 'not completed' }}</span>
+                                            <span class="">{{ $note->completed ? 'completed' : 'in progress' }}</span>
                                         </div>
                                     </div>
                                 </td>
