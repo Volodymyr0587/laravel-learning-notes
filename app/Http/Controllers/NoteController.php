@@ -60,16 +60,38 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        //
+        return view('notes.edit', compact('note'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Note $note)
+    public function update(StoreNoteRequest $request, Note $note)
     {
-        //
+        $validated = $request->validated();
+
+        // Оновлюємо значення 'database_name', якщо порожнє, встановлюємо 'sqlite'
+        $validated['database_name'] = $this->setDefaultDatabaseName($validated['database_name']);
+
+        // Обробка зображення
+        if ($request->hasFile('image')) {
+            $validated['image'] = $this->handleImageUpload($request);
+        }
+
+        // Перевірка, чи чекбокс відмічений
+        $validated['completed'] = $request->has('completed');
+
+        // Оновлюємо запис
+        $note->update($validated);
+
+        // Оновлюємо категорії, якщо вони були передані
+        if ($request->has('categories')) {
+            $note->categories()->sync($request->categories);
+        }
+
+        return to_route('dashboard')->with('success', 'Record successfully updated.');
     }
+
 
     /**
      * Remove the specified resource from storage.
