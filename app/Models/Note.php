@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use App\Enums\ResourceType;
+
+use App\Models\ResourceType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -18,6 +19,11 @@ class Note extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function resourceType(): BelongsTo
+    {
+        return $this->belongsTo(ResourceType::class);
     }
 
     public function categories(): BelongsToMany

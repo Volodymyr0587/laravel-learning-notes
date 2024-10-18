@@ -22,7 +22,9 @@ class NoteController extends Controller
      */
     public function create()
     {
-        return view('notes.create');
+        $resourceTypes = auth()->user()->resourceTypes()->get();
+
+        return view('notes.create', compact('resourceTypes'));
     }
 
     /**
@@ -34,9 +36,10 @@ class NoteController extends Controller
 
         $validated['database_name'] = $this->setDefaultDatabaseName($validated['database_name']);
         $validated['image'] = $this->handleImageUpload($request);
-
         // Перевірка, чи чекбокс відмічений
         $validated['completed'] = $request->has('completed');
+
+        $validated['resource_type_id'] = $request->resource_type_id;
 
         $note = auth()->user()->notes()->create($validated);
 
@@ -44,7 +47,7 @@ class NoteController extends Controller
             $note->categories()->attach($request->categories);
         }
 
-        return to_route('dashboard')->with('success', 'Record successfully created.');
+        return to_route('notes.index')->with('success', 'Record successfully created.');
 
     }
 

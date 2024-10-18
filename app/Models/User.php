@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Note::class);
     }
+
+    public function resourceTypes(): HasMany
+    {
+        return $this->hasMany(ResourceType::class);
+    }
 }

@@ -29,7 +29,7 @@ class StoreNoteRequest extends FormRequest
             'link_to_tutorial' => 'required|string|max:255',
             'link_to_resource' => 'nullable|string|max:255',
             'resource_name' => 'nullable|string|max:255',
-            'resource_type' => ['nullable', new Enum(ResourceType::class)],
+            'resource_type_id' => 'nullable|exists:resource_types,id',
             'description' => 'nullable|string|max:5000',
             'project_folder' => 'nullable|string|max:500',
             'database_name' =>'nullable|string|max:255',

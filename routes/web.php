@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ResourceTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
@@ -20,6 +21,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('notes', NoteController::class);
+    Route::resource('resource-types', ResourceTypeController::class);
     Route::resource('categories', CategoryController::class);
 
     Route::get('/trash', [NoteController::class, 'trash'])->name('notes.trash');
