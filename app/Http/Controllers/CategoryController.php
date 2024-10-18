@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -28,9 +29,9 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $validated = $request->validate(['name' => 'required|string|min:2|max:255']);
+        $validated = $request->validated();
         auth()->user()->categories()->create($validated);
         return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
@@ -56,11 +57,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(StoreCategoryRequest $request, Category $category)
     {
         Gate::authorize('editCategory', $category);
 
-        $validated = $request->validate(['name' => 'required|string|min:2|max:255']);
+        $validated = $request->validated();
         $category->update($validated);
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
