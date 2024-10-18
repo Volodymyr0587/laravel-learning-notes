@@ -32,6 +32,9 @@
                                                 placeholder="Laravel Livewire Crash Course | Livewire 3 Tutorial for Beginners in 1.5 Hours"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
+                                        @error('title')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-span-full">
@@ -44,6 +47,9 @@
                                                 autocomplete="link_to_tutorial"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
+                                        @error('link_to_tutorial')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-span-full">
@@ -56,6 +62,9 @@
                                                 autocomplete="link_to_resource"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
+                                        @error('link_to_resource')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-span-full">
@@ -68,6 +77,9 @@
                                                 autocomplete="resource_name"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
+                                        @error('resource_name')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="sm:col-span-3">
@@ -106,13 +118,14 @@
 
                                     <div class="col-span-full">
                                         <label for="description"
-                                            class="block text-sm font-medium leading-6 text-gray-900">Description</label>
+                                            class="block text-sm font-medium leading-6 text-gray-900">Description (optional)</label>
                                         <div class="mt-2">
-                                            <textarea id="description" name="description" rows="3"
+                                            <textarea id="description" name="description" rows="3" placeholder="Write a description"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">{{ old('description', $note->description) }}</textarea>
                                         </div>
-                                        <p class="mt-3 text-sm leading-6 text-gray-600">Write a description. (optional)
-                                        </p>
+                                        @error('description')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="sm:col-span-3">
@@ -125,6 +138,9 @@
                                                 autocomplete="project_folder"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
+                                        @error('project_folder')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="sm:col-span-3">
@@ -137,6 +153,9 @@
                                                 autocomplete="database_name"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
+                                        @error('database_name')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
 
@@ -151,6 +170,9 @@
                                                 autocomplete="link_to_github_repo"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
+                                        @error('link_to_github_repo')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-span-full">
@@ -164,6 +186,9 @@
                                                 autocomplete="link_to_source_code"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
+                                        @error('link_to_source_code')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-span-full">
@@ -177,6 +202,9 @@
                                                 id="link_to_source_materials" autocomplete="link_to_source_materials"
                                                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                                         </div>
+                                        @error('link_to_source_materials')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -193,6 +221,9 @@
                                             <input type="file" name="image" id="image"
                                                 class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" />
                                         </div>
+                                        @error('image')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +235,7 @@
                                             <div class="flex h-6 items-center">
                                                 <input id="completed" name="completed" type="checkbox" value="1"
                                                     @checked(old('completed', $note->completed))
-                                                    class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+                                                    class="h-4 w-4 rounded border-gray-500 text-indigo-600 focus:ring-indigo-600">
                                             </div>
                                             <div class="text-sm leading-6">
                                                 <label for="completed"
