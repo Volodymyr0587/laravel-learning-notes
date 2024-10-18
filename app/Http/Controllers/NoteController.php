@@ -14,10 +14,12 @@ class NoteController extends Controller
     public function index(Request $request)
     {
         $categoryId = $request->query('category_id');
+        $resourceTypeId = $request->query('resource_type_id');
 
         $notes = auth()->user()->notes()
             ->with(['categories', 'resourceType'])
             ->filterByCategory($categoryId)
+            ->filterByResourceType($resourceTypeId)
             ->paginate(2)->withQueryString();
 
         return view('notes.index', compact('notes'));

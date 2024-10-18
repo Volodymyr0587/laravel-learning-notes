@@ -168,7 +168,11 @@
                                     <div class="w-max">
                                         <div
                                             class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-blue-900 bg-blue-500/20 uppercase rounded-md select-none whitespace-nowrap ">
-                                            <span class="">{{ $note->resourceType->name ?? 'no type' }}</span>
+                                            @if ($note->resourceType)
+                                            <a href="{{ route('notes.index', ['resource_type_id' => $note->resourceType->id]) }}" class="">{{ $note->resourceType->name }}</a>
+                                            @else
+                                            <span>No resource type</span>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>

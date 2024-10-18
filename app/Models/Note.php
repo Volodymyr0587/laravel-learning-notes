@@ -42,6 +42,15 @@ class Note extends Model
         return $query;
     }
 
+    public function scopeFilterByResourceType($query, $resourceTypeId)
+    {
+        if ($resourceTypeId) {
+            return $query->where('resource_type_id', $resourceTypeId);
+        }
+
+        return $query;
+    }
+
     protected static function boot()
     {
         parent::boot();
