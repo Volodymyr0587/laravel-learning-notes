@@ -51,6 +51,15 @@ class Note extends Model
         return $query;
     }
 
+    public function scopeFilterByStatus($query, $status)
+    {
+        if (isset($status)) {
+            return $query->where('completed', $status);
+        }
+
+        return $query;
+    }
+
     protected static function boot()
     {
         parent::boot();

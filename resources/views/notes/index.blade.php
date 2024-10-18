@@ -39,32 +39,38 @@
                     <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
                         <div class="block w-full overflow-hidden md:w-max">
                             <nav>
-                                <ul role="tablist"
-                                    class="relative flex flex-row p-1 rounded-lg bg-blue-gray-50 bg-opacity-60">
-                                    <li role="tab"
-                                        class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
-                                        data-value="all">
-                                        <div class="z-20 text-inherit">
+                                <ul role="tablist" class="relative flex flex-row p-1 rounded-lg bg-blue-gray-50 bg-opacity-60">
+                                    {{-- Фільтр "All" --}}
+                                    <li role="tab" class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none {{ request('completed') === 0 ? 'text-white bg-blue-500' : 'text-blue-gray-900' }}">
+                                        <a href="{{ route('notes.index') }}" class="z-20 text-inherit">
                                             &nbsp;&nbsp;All&nbsp;&nbsp;
-                                        </div>
-                                        <div class="absolute inset-0 z-10 h-full bg-white rounded-md shadow">
-                                        </div>
+                                        </a>
+                                        @if(request('completed') === null)
+                                            <div class="absolute inset-0 z-10 h-full bg-white rounded-md shadow"></div>
+                                        @endif
                                     </li>
-                                    <li role="tab"
-                                        class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
-                                        data-value="monitored">
-                                        <div class="z-20 text-inherit">
-                                            &nbsp;&nbsp;Monitored&nbsp;&nbsp;
-                                        </div>
+
+                                    {{-- Фільтр "Completed" --}}
+                                    <li role="tab" class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none {{ request('completed') === 1 ? 'text-white bg-blue-500' : 'text-blue-gray-900' }}">
+                                        <a href="{{ route('notes.index', ['completed' => 1]) }}" class="z-20 text-inherit">
+                                            &nbsp;&nbsp;Completed&nbsp;&nbsp;
+                                        </a>
+                                        @if(request('completed') === '1')
+                                            <div class="absolute inset-0 z-10 h-full bg-white rounded-md shadow"></div>
+                                        @endif
                                     </li>
-                                    <li role="tab"
-                                        class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
-                                        data-value="unmonitored">
-                                        <div class="z-20 text-inherit">
-                                            &nbsp;&nbsp;Unmonitored&nbsp;&nbsp;
-                                        </div>
+
+                                    {{-- Фільтр "InProgress" --}}
+                                    <li role="tab" class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none {{ request('completed') === 0 ? 'text-white bg-blue-500' : 'text-blue-gray-900' }}">
+                                        <a href="{{ route('notes.index', ['completed' => 0]) }}" class="z-20 text-inherit">
+                                            &nbsp;&nbsp;InProgress&nbsp;&nbsp;
+                                        </a>
+                                        @if(request('completed') === '0')
+                                            <div class="absolute inset-0 z-10 h-full bg-white rounded-md shadow"></div>
+                                        @endif
                                     </li>
                                 </ul>
+
                             </nav>
                         </div>
                         <div class="w-full md:w-72">
@@ -193,10 +199,10 @@
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <div class="w-max">
-                                        <div
+                                        <a href="{{ route('notes.index', ['completed' => $note->completed]) }}"
                                             class="relative grid items-center px-2 py-1 font-sans text-xs font-bold {{ $note->completed ? 'text-green-900 bg-green-500/20' : 'text-yellow-900 bg-yellow-500/20' }} uppercase rounded-md select-none whitespace-nowrap ">
                                             <span class="">{{ $note->completed ? 'completed' : 'in progress' }}</span>
-                                        </div>
+                                        </a>
                                     </div>
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">
