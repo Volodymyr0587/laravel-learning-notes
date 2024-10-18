@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
 
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(ResourceType::class)->constrained();
+            $table->foreignIdFor(ResourceType::class)->nullable()->constrained();
 
 
             $table->string('title');

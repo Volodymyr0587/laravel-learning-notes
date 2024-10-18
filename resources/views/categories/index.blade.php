@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ auth()->user()->name }}'s notes
+            {{ auth()->user()->name }}'s categories
         </h2>
     </x-slot>
 
@@ -15,11 +15,11 @@
                         <div>
                             <h5
                                 class="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-                                Notes list
+                                Categories list
                             </h5>
                             <p
                                 class="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-                                See information about all notes
+                                See information about all categories
                             </p>
                         </div>
                         <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
@@ -28,11 +28,11 @@
                                 type="button">
                                 view all
                             </button>
-                            <a href="{{ route('notes.create') }}"
+                            <a href="{{ route('categories.create') }}"
                                 class="flex select-none items-center gap-3 rounded-lg bg-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                 type="button">
                                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" stroke-width="2" class="w-4 h-4" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M13.75 5.00001V2.25001L14.1716 2.25001L14.2516 2.24985C14.5773 2.24891 14.9288 2.2479 15.2555 2.38322C15.5822 2.51854 15.83 2.7678 16.0596 2.99875L16.1161 3.05546L18.9445 5.88389L19.0013 5.94038C19.2322 6.17 19.4815 6.41783 19.6168 6.74452C19.7521 7.07122 19.7511 7.42271 19.7502 7.74838L19.75 7.82843V8.25001H17C16.036 8.25001 15.3884 8.24841 14.9054 8.18347C14.4439 8.12143 14.2464 8.01421 14.1161 7.88389C13.9858 7.75357 13.8786 7.55608 13.8165 7.09462C13.7516 6.61158 13.75 5.96402 13.75 5.00001Z" fill="#FFFFFF"></path> <path d="M12.25 5.05201L12.25 2.25001L8.948 2.25001C8.04953 2.24998 7.30031 2.24995 6.70552 2.32992C6.07773 2.41432 5.51093 2.59999 5.05546 3.05546C4.59999 3.51093 4.41432 4.07773 4.32992 4.70553C4.24995 5.30029 4.24997 6.04956 4.25 6.94801V16.75H4.75V16C4.75 14.7574 5.75736 13.75 7 13.75C8.24264 13.75 9.25 14.7574 9.25 16V16.75H10C11.2426 16.75 12.25 17.7574 12.25 19C12.25 20.2426 11.2426 21.25 10 21.25H9.25V21.75H15.052C15.9505 21.75 16.6997 21.7501 17.2945 21.6701C17.9223 21.5857 18.4891 21.4 18.9445 20.9446C19.4 20.4891 19.5857 19.9223 19.6701 19.2945C19.7501 18.6997 19.75 17.9505 19.75 17.052L19.75 9.75001L16.948 9.75001C16.0495 9.75004 15.3003 9.75006 14.7055 9.6701C14.0777 9.58569 13.5109 9.40002 13.0555 8.94455C12.6 8.48908 12.4143 7.92228 12.3299 7.29449C12.2499 6.69971 12.25 5.95049 12.25 5.05201Z" fill="#FFFFFF"></path> <path d="M8 16C8 15.4477 7.55228 15 7 15C6.44772 15 6 15.4477 6 16V18H4C3.44772 18 3 18.4477 3 19C3 19.5523 3.44772 20 4 20H6V22C6 22.5523 6.44772 23 7 23C7.55228 23 8 22.5523 8 22V20H10C10.5523 20 11 19.5523 11 19C11 18.4477 10.5523 18 10 18H8V16Z" fill="#FFFFFF"></path> </g></svg>
-                                Create note
+                                Add category
                             </a>
                         </div>
                     </div>
@@ -97,31 +97,13 @@
                                 <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
                                     <p
                                         class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Image and title
+                                        ID
                                     </p>
                                 </th>
                                 <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
                                     <p
                                         class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Link
-                                    </p>
-                                </th>
-                                <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
-                                    <p
-                                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Type
-                                    </p>
-                                </th>
-                                <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
-                                    <p
-                                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Categories
-                                    </p>
-                                </th>
-                                <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
-                                    <p
-                                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
-                                        Status
+                                        Name
                                     </p>
                                 </th>
                                 <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
@@ -139,70 +121,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($notes as $note)
+                            @forelse ($categories as $category)
                             <tr>
                                 <td class="p-4 border-b border-blue-gray-50">
-                                    <div class="flex items-center gap-3">
-                                        <img src="{{ $note->image ? asset('storage/' . $note->image) : asset('images/default.jpg') }}"
-                                            alt="{{ $note->title }}"
-                                            class="relative inline-block h-20 w-20 !rounded-md object-cover object-center" />
-                                        <div class="flex flex-col">
-                                            <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                {{ Str::limit($note->title, 40) }}
-                                            </p>
-                                            <a href="{{ route('notes.show', $note) }}" class="block font-sans text-sm antialiased font-normal leading-normal text-blue-500 hover:text-blue-900 opacity-70">
-                                                View
-                                            </a>
-                                        </div>
-                                    </div>
+                                    {{ $category->id }}
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">
-                                    <div class="flex flex-col">
-                                        <a href="{{ $note->link_to_tutorial }}" target="_blank"
-                                            class="block font-sans text-sm antialiased font-normal leading-normal text-blue-500 hover:text-blue-900 opacity-70">
-                                            {{ Str::limit($note->link_to_tutorial, 30) }}
-                                        </a>
-                                    </div>
+                                    {{ $category->name }}
                                 </td>
-                                <td class="p-4 border-b border-blue-gray-50">
-                                    <div class="w-max">
-                                        <div
-                                            class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-blue-900 bg-blue-500/20 uppercase rounded-md select-none whitespace-nowrap ">
-                                            <span class="">{{ $note->resourceType->name ?? 'no type' }}</span>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="p-4 border-b border-blue-gray-50">
-                                    <div class="w-max grid grid-cols-2 items-center">
-                                        @forelse ($note->categories->pluck('name') as $category)
-                                        <div
-                                            class="relative grid items-center px-2 py-1 mx-1 my-1 font-sans text-xs font-bold text-purple-900 bg-purple-500/20 uppercase rounded-md select-none whitespace-nowrap ">
-                                            <span class="">{{ $category }}</span>
-                                        </div>
-                                        @empty
-                                        <div
-                                            class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-purple-900 bg-purple-500/20 uppercase rounded-md select-none whitespace-nowrap ">
-                                            <span class="">No categories</span>
-                                        </div>
-                                        @endforelse
-                                    </div>
-                                </td>
-                                <td class="p-4 border-b border-blue-gray-50">
-                                    <div class="w-max">
-                                        <div
-                                            class="relative grid items-center px-2 py-1 font-sans text-xs font-bold {{ $note->completed ? 'text-green-900 bg-green-500/20' : 'text-yellow-900 bg-yellow-500/20' }} uppercase rounded-md select-none whitespace-nowrap ">
-                                            <span class="">{{ $note->completed ? 'completed' : 'in progress' }}</span>
-                                        </div>
-                                    </div>
-                                </td>
+
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <p
                                         class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                        {{ $note->updated_at->format('d-m-Y H:i') }}
+                                        {{ $category->updated_at->format('d-m-Y H:i') }}
                                     </p>
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">
-                                    <a href="{{ route('notes.edit', $note) }}">
+                                    <a href="{{ route('categories.edit', $category) }}">
                                     <button
                                         class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                         type="button">
@@ -233,14 +168,14 @@
                 {{-- PAGINATION --}}
                 <div class="flex items-center justify-between p-4 border-t border-blue-gray-50">
                     {{-- Previous Page Button --}}
-                    @if ($notes->onFirstPage())
+                    @if ($categories->onFirstPage())
                         <button
                             class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                             disabled>
                             Previous
                         </button>
                     @else
-                        <a href="{{ $notes->previousPageUrl() }}"
+                        <a href="{{ $categories->previousPageUrl() }}"
                             class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75">
                             Previous
                         </a>
@@ -248,8 +183,8 @@
 
                     {{-- Page Numbers --}}
                     <div class="flex items-center gap-2">
-                        @foreach(range(1, $notes->lastPage()) as $page)
-                            @if ($page == $notes->currentPage())
+                        @foreach(range(1, $categories->lastPage()) as $page)
+                            @if ($page == $categories->currentPage())
                                 <button
                                     class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg border border-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                     disabled>
@@ -258,7 +193,7 @@
                                     </span>
                                 </button>
                             @else
-                                <a href="{{ $notes->url($page) }}"
+                                <a href="{{ $categories->url($page) }}"
                                     class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10">
                                     <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                                         {{ $page }}
@@ -269,8 +204,8 @@
                     </div>
 
                     {{-- Next Page Button --}}
-                    @if ($notes->hasMorePages())
-                        <a href="{{ $notes->nextPageUrl() }}"
+                    @if ($categories->hasMorePages())
+                        <a href="{{ $categories->nextPageUrl() }}"
                             class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75">
                             Next
                         </a>

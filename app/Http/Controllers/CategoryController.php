@@ -12,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = auth()->user()->categories()->paginate(10);
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -20,7 +21,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -28,7 +29,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(['name' => 'required|string|min:2|max:255']);
+        auth()->user()->categories()->create($validated);
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     /**
@@ -44,7 +47,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -52,7 +55,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validated = $request->validate(['name' => 'required|string|min:2|max:255']);
+        $category->update($validated);
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     /**
@@ -60,6 +65,14 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        // Check if the category has related notes
+        if ($category->notes()->exists()) {
+            // Optionally handle reassignment or deletion of the related notes
+            return redirect()->back()->with('delete-category-type-error', 'This category has associated notes and cannot be deleted.');
+        }
+
+        $category->delete();
+
+        return to_route('categories.index')->with('success', 'Category successfully deleted');
     }
 }

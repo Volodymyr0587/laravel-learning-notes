@@ -13,7 +13,7 @@ class NoteController extends Controller
      */
     public function index()
     {
-        $notes = auth()->user()->notes()->paginate(2);
+        $notes = auth()->user()->notes()->with('categories')->paginate(2);
         return view('notes.index', compact('notes'));
     }
 
@@ -23,8 +23,9 @@ class NoteController extends Controller
     public function create()
     {
         $resourceTypes = auth()->user()->resourceTypes()->get();
+        $categories = auth()->user()->categories()->get();
 
-        return view('notes.create', compact('resourceTypes'));
+        return view('notes.create', compact('resourceTypes', 'categories'));
     }
 
     /**
@@ -65,8 +66,9 @@ class NoteController extends Controller
     public function edit(Note $note)
     {
         $resourceTypes = auth()->user()->resourceTypes()->get();
-        
-        return view('notes.edit', compact('note', 'resourceTypes'));
+        $categories = auth()->user()->categories()->get();
+
+        return view('notes.edit', compact('note', 'resourceTypes', 'categories'));
     }
 
     /**

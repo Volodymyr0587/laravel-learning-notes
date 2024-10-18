@@ -20,12 +20,5 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
-        Category::create(['name' => 'General']);
-        Category::create(['name' => 'PHP']);
-        Category::create(['name' => 'Laravel']);
-        Category::create(['name' => 'Livewire']);
-        Category::create(['name' => 'SQL']);
-        Category::create(['name' => 'Python']);
     }
 }
