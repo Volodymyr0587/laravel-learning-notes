@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreNoteRequest;
 use App\Models\Note;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\StoreNoteRequest;
 
 class NoteController extends Controller
 {
@@ -77,6 +78,8 @@ class NoteController extends Controller
      */
     public function show(Note $note)
     {
+        Gate::authorize('editNote', $note);
+
         return view('notes.show', compact('note'));
     }
 
@@ -85,6 +88,8 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
+        Gate::authorize('editNote', $note);
+
         $resourceTypes = auth()->user()->resourceTypes()->get();
         $categories = auth()->user()->categories()->get();
 
@@ -96,6 +101,8 @@ class NoteController extends Controller
      */
     public function update(StoreNoteRequest $request, Note $note)
     {
+        Gate::authorize('editNote', $note);
+
         $validated = $request->validated();
 
         // Оновлюємо значення 'database_name', якщо порожнє, встановлюємо 'sqlite'
@@ -128,6 +135,8 @@ class NoteController extends Controller
      */
     public function destroy(Note $note)
     {
+        Gate::authorize('editNote', $note);
+
         $note->delete();
 
         return to_route('notes.index')->with('success', 'Record successfully deleted');
@@ -139,9 +148,11 @@ class NoteController extends Controller
         return view('notes.trash', compact('notes'));
     }
 
-    public function restore($id)
+    public function restore(Note $note)
     {
-        $note = Note::withTrashed()->findOrFail($id);
+        Gate::authorize('editNote', $note);
+
+        $note = Note::withTrashed()->findOrFail($note);
         $note->restore();
 
         return redirect()->route('notes.trash')->with('success', 'Note restored');

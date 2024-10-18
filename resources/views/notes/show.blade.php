@@ -35,7 +35,11 @@
                             class="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
                             <div class="lg:pr-4">
                                 <div class="lg:max-w-lg">
-                                    <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">{{ $note->resourceType->name }}</span>
+                                    @if ($note->resourceType?->name)
+                                    <span class="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
+                                        {{ $note->resourceType->name }}
+                                    </span>
+                                    @endif
                                     <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium {{ $note->completed ? 'bg-green-50 text-green-700 ring-green-600/20' : 'bg-yellow-50 text-yellow-700 ring-yellow-600/20' }} ring-1 ring-inset">{{ $note->completed ? 'completed' : 'in progress' }}</span>
                                     <h1 class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ $note->title }}</h1>
                                 </div>
