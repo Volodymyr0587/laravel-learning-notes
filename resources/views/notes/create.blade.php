@@ -71,7 +71,6 @@
                                                     <option value="{{ $resourceType->id }}" {{ old('resource_type_id', $note->resource_type_id ?? '') == $resourceType->id ? 'selected' : '' }}>
                                                         {{ $resourceType->name }}
                                                     </option>
-                                                    {{-- <option value="{{ $resourceType->id }}">{{ $resourceType->name }}</option> --}}
                                                 @endforeach
                                             </select>
                                         </div>

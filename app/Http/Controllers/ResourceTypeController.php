@@ -65,6 +65,12 @@ class ResourceTypeController extends Controller
      */
     public function destroy(ResourceType $resourceType)
     {
+        // Check if the resource type has related notes
+        if ($resourceType->notes()->exists()) {
+            // Optionally handle reassignment or deletion of the related notes
+            return redirect()->back()->with('delete-resource-type-error', 'This resource type has associated notes and cannot be deleted.');
+        }
+
         $resourceType->delete();
 
         return to_route('resource-types.index')->with('success', 'Resource type successfully deleted');

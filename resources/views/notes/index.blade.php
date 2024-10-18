@@ -109,6 +109,12 @@
                                 <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
                                     <p
                                         class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                        Type
+                                    </p>
+                                </th>
+                                <th class="p-4 border-y border-blue-gray-100 bg-blue-gray-50/50">
+                                    <p
+                                        class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
                                         Status
                                     </p>
                                 </th>
@@ -150,6 +156,14 @@
                                             class="block font-sans text-sm antialiased font-normal leading-normal text-blue-500 hover:text-blue-900 opacity-70">
                                             {{ Str::limit($note->link_to_tutorial, 30) }}
                                         </a>
+                                    </div>
+                                </td>
+                                <td class="p-4 border-b border-blue-gray-50">
+                                    <div class="w-max">
+                                        <div
+                                            class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-blue-900 bg-blue-500/20 uppercase rounded-md select-none whitespace-nowrap ">
+                                            <span class="">{{ $note->resourceType->name }}</span>
+                                        </div>
                                     </div>
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">

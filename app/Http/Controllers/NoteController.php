@@ -64,7 +64,9 @@ class NoteController extends Controller
      */
     public function edit(Note $note)
     {
-        return view('notes.edit', compact('note'));
+        $resourceTypes = auth()->user()->resourceTypes()->get();
+        
+        return view('notes.edit', compact('note', 'resourceTypes'));
     }
 
     /**
@@ -84,6 +86,8 @@ class NoteController extends Controller
 
         // Перевірка, чи чекбокс відмічений
         $validated['completed'] = $request->has('completed');
+
+        $validated['resource_type_id'] = $request->resource_type_id;
 
         // Оновлюємо запис
         $note->update($validated);
