@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ResourceType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ResourceTypeController extends Controller
 {
@@ -39,7 +40,7 @@ class ResourceTypeController extends Controller
      */
     public function show(ResourceType $resourceType)
     {
-        //
+        Gate::authorize('editResourceType', $resourceType);
     }
 
     /**
@@ -47,6 +48,8 @@ class ResourceTypeController extends Controller
      */
     public function edit(ResourceType $resourceType)
     {
+        Gate::authorize('editResourceType', $resourceType);
+
         return view('resource_types.edit', compact('resourceType'));
     }
 
@@ -55,6 +58,8 @@ class ResourceTypeController extends Controller
      */
     public function update(Request $request, ResourceType $resourceType)
     {
+        Gate::authorize('editResourceType', $resourceType);
+
         $validated = $request->validate(['name' => 'required|string|min:2|max:255']);
         $resourceType->update($validated);
         return redirect()->route('resource-types.index')->with('success', 'Resource type updated successfully.');
@@ -65,6 +70,7 @@ class ResourceTypeController extends Controller
      */
     public function destroy(ResourceType $resourceType)
     {
+        Gate::authorize('editResourceType', $resourceType);
         // Check if the resource type has related notes
         if ($resourceType->notes()->exists()) {
             // Optionally handle reassignment or deletion of the related notes

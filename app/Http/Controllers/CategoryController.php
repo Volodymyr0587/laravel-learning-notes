@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -39,7 +40,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        Gate::authorize('editCategory', $category);
     }
 
     /**
@@ -47,6 +48,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        Gate::authorize('editCategory', $category);
+
         return view('categories.edit', compact('category'));
     }
 
@@ -55,6 +58,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        Gate::authorize('editCategory', $category);
+
         $validated = $request->validate(['name' => 'required|string|min:2|max:255']);
         $category->update($validated);
         return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
@@ -65,6 +70,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        Gate::authorize('editCategory', $category);
         // Check if the category has related notes
         if ($category->notes()->exists()) {
             // Optionally handle reassignment or deletion of the related notes
