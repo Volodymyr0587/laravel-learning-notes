@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ResourceType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\StoreResourceTypeRequest;
 
 class ResourceTypeController extends Controller
 {
@@ -28,7 +29,7 @@ class ResourceTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreResourceTypeRequest $request)
     {
         $validated = $request->validate(['name' => 'required|string|min:2|max:255']);
         auth()->user()->resourceTypes()->create($validated);
@@ -56,7 +57,7 @@ class ResourceTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ResourceType $resourceType)
+    public function update(StoreResourceTypeRequest $request, ResourceType $resourceType)
     {
         Gate::authorize('editResourceType', $resourceType);
 
