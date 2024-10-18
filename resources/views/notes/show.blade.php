@@ -159,7 +159,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="font-inconsolata m-8 p-6 rounded-2xl border-2 border-gary-100 indent-8 tracking-wider font-mono text-gray-900 bg-gray-50">
+                    <div class="font-inconsolata m-8 p-6 rounded-2xl border-2 border-gary-100 indent-8 tracking-wider text-gray-900 bg-gray-50">
                         {{ $note->description }}
                     </div>
                 </div>
