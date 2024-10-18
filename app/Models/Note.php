@@ -49,6 +49,19 @@ class Note extends Model
         return $status !== null ? $query->where('completed', $status) : $query;
     }
 
+    public function scopeSearchByTitleDescription($query, $searchTerm)
+    {
+        if ($searchTerm) {
+            return $query->where(function ($q) use ($searchTerm) {
+                $q->where('title', 'like', '%' . $searchTerm . '%')
+                ->orWhere('description', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+        return $query;
+    }
+
+
     protected static function boot()
     {
         parent::boot();

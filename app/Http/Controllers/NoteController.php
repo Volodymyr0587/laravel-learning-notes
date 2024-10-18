@@ -14,15 +14,20 @@ class NoteController extends Controller
 
     public function index(Request $request)
     {
+        // Get the search query from the request
+        $searchTerm = $request->query('search');
+        // Start building the query
         $query = auth()->user()->notes()
             ->with([
                 'categories:id,name',
                 'resourceType:id,name'
             ]);
-
+        // Apply filters for category, resource type, and status
         $query->filterByCategory($request->query('category_id'))
             ->filterByResourceType($request->query('resource_type_id'))
             ->filterByStatus($request->query('completed'));
+        // Apply search filter for title and description
+        $query->searchByTitleDescription($searchTerm);
 
         $notes = $query->select(['id', 'image', 'title', 'link_to_tutorial',  'resource_type_id', 'completed', 'updated_at'])
             ->latest()
