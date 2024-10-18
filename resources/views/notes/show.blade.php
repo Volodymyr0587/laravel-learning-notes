@@ -154,10 +154,13 @@
                                     </ul>
 
                                     <h2 class="mt-16 text-2xl font-bold tracking-tight text-gray-900">Description</h2>
-                                    <p class="mt-6">{{ $note->description }}</p>
+                                    {{-- <p class="mt-6">{{ $note->description }}</p> --}}
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="font-inconsolata m-8 p-6 rounded-2xl border-2 border-gary-100 indent-8 tracking-wider font-mono text-gray-900 bg-gray-50">
+                        {{ $note->description }}
                     </div>
                 </div>
             </div>

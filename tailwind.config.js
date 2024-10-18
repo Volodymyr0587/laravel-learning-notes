@@ -14,6 +14,7 @@ export default withMT ({
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                inconsolata: ['Inconsolata'],
             },
         },
     },
