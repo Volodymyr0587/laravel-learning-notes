@@ -31,6 +31,17 @@ class Note extends Model
         return $this->belongsToMany(Category::class);
     }
 
+    public function scopeFilterByCategory($query, $categoryId)
+    {
+        if ($categoryId) {
+            return $query->whereHas('categories', function ($q) use ($categoryId) {
+                $q->where('categories.id', $categoryId);
+            });
+        }
+
+        return $query;
+    }
+
     protected static function boot()
     {
         parent::boot();

@@ -23,11 +23,11 @@
                             </p>
                         </div>
                         <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
-                            <button
+                            <a href="{{ route('notes.index') }}"
                                 class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                 type="button">
                                 view all
-                            </button>
+                            </a>
                             <a href="{{ route('notes.create') }}"
                                 class="flex select-none items-center gap-3 rounded-lg bg-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                                 type="button">
@@ -174,11 +174,11 @@
                                 </td>
                                 <td class="p-4 border-b border-blue-gray-50">
                                     <div class="w-max grid grid-cols-2 items-center">
-                                        @forelse ($note->categories->pluck('name') as $category)
-                                        <div
+                                        @forelse ($note->categories as $category)
+                                        <a href="{{ route('notes.index', ['category_id' => $category->id]) }}"
                                             class="relative grid items-center px-2 py-1 mx-1 my-1 font-sans text-xs font-bold text-purple-900 bg-purple-500/20 uppercase rounded-md select-none whitespace-nowrap ">
-                                            <span class="">{{ $category }}</span>
-                                        </div>
+                                            <span class="">{{ $category->name }}</span>
+                                        </a>
                                         @empty
                                         <div
                                             class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-purple-900 bg-purple-500/20 uppercase rounded-md select-none whitespace-nowrap ">

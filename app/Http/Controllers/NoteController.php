@@ -11,9 +11,15 @@ class NoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $notes = auth()->user()->notes()->with('categories')->paginate(2);
+        $categoryId = $request->query('category_id');
+
+        $notes = auth()->user()->notes()
+            ->with(['categories', 'resourceType'])
+            ->filterByCategory($categoryId)
+            ->paginate(2)->withQueryString();
+
         return view('notes.index', compact('notes'));
     }
 
