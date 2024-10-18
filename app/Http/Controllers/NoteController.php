@@ -11,18 +11,23 @@ class NoteController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index(Request $request)
     {
-        $categoryId = $request->query('category_id');
-        $resourceTypeId = $request->query('resource_type_id');
-        $status = $request->query('completed');
+        $query = auth()->user()->notes()
+            ->with([
+                'categories:id,name',
+                'resourceType:id,name'
+            ]);
 
-        $notes = auth()->user()->notes()
-            ->with(['categories', 'resourceType'])
-            ->filterByCategory($categoryId)
-            ->filterByResourceType($resourceTypeId)
-            ->filterByStatus($status)
-            ->paginate(2)->withQueryString();
+        $query->filterByCategory($request->query('category_id'))
+            ->filterByResourceType($request->query('resource_type_id'))
+            ->filterByStatus($request->query('completed'));
+
+        $notes = $query->select(['id', 'image', 'title', 'link_to_tutorial',  'resource_type_id', 'completed', 'updated_at'])
+            ->latest()
+            ->paginate(5)
+            ->withQueryString();
 
         return view('notes.index', compact('notes'));
     }

@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Models\ResourceType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -31,33 +32,21 @@ class Note extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function scopeFilterByCategory($query, $categoryId)
+    public function scopeFilterByCategory(Builder $query, $categoryId): Builder
     {
-        if ($categoryId) {
-            return $query->whereHas('categories', function ($q) use ($categoryId) {
-                $q->where('categories.id', $categoryId);
-            });
-        }
-
-        return $query;
+        return $categoryId ? $query->whereHas('categories', function ($q) use ($categoryId) {
+            $q->where('categories.id', $categoryId);
+        }) : $query;
     }
 
-    public function scopeFilterByResourceType($query, $resourceTypeId)
+    public function scopeFilterByResourceType(Builder $query, $resourceTypeId): Builder
     {
-        if ($resourceTypeId) {
-            return $query->where('resource_type_id', $resourceTypeId);
-        }
-
-        return $query;
+        return $resourceTypeId ? $query->where('resource_type_id', $resourceTypeId) : $query;
     }
 
-    public function scopeFilterByStatus($query, $status)
+    public function scopeFilterByStatus(Builder $query, $status): Builder
     {
-        if (isset($status)) {
-            return $query->where('completed', $status);
-        }
-
-        return $query;
+        return $status !== null ? $query->where('completed', $status) : $query;
     }
 
     protected static function boot()
