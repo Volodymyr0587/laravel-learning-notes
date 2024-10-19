@@ -10,11 +10,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <x-alerts.alert
-                    messageType="delete-category-type-error"
-                    alertType="red"
-                    title="Error!" />
-
+                    <x-alerts.alert messageType="delete-category-type-error"
+                                    messageColor="red"
+                                    title="Error!"
+                                    class="mb-2" />
 
                     <form action="{{ route('categories.update', $category) }}" method="POST" enctype="multipart/form-data">
                         @csrf
