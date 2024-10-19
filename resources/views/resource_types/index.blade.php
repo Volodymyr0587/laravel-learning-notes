@@ -96,7 +96,7 @@
                     </div>
                 </div>
                 {{-- TABLE --}}
-                <div class="p-6 px-0 overflow-scroll">
+                <div class="p-6 px-0">
                     <table class="w-full mt-4 text-left table-auto min-w-max">
                         <thead>
                             <tr>
@@ -162,7 +162,7 @@
                             </tr>
                             @empty
                             <tr>
-                                <td class="p-4 border-b border-blue-gray-50">
+                                <td class="p-4">
                                     <span class="font-bold">No data.</span>
                                 </td>
                             </tr>
@@ -172,7 +172,7 @@
                 </div>
                 {{-- END TABLE --}}
                 {{-- PAGINATION --}}
-                <div class="flex items-center justify-between p-4 border-t border-blue-gray-50">
+                <div class="flex items-center justify-between pb-6 px-4">
                     {{-- Previous Page Button --}}
                     @if ($resourceTypes->onFirstPage())
                         <button
