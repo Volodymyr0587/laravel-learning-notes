@@ -74,7 +74,7 @@ class Note extends Model
             }
         });
 
-        static::deleting(function ($note) {
+        static::forceDeleting(function ($note) {
             if ($note->image) {
                 Storage::disk('public')->delete($note->image);
             }
