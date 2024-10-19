@@ -164,7 +164,7 @@
                                             class="relative inline-block h-20 w-20 !rounded-md object-cover object-center" />
                                         <div class="flex flex-col">
                                             <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                                                {{ Str::limit($note->title, 40) }}
+                                                {{ Str::limit($note->title, 30) }}
                                             </p>
                                             <a href="{{ route('notes.show', $note) }}" class="block font-sans text-sm antialiased font-normal leading-normal text-blue-500 hover:text-blue-900 opacity-70">
                                                 View
@@ -176,7 +176,7 @@
                                     <div class="flex flex-col">
                                         <a href="{{ $note->link_to_tutorial }}" target="_blank"
                                             class="block font-sans text-sm antialiased font-normal leading-normal text-blue-500 hover:text-blue-900 opacity-70">
-                                            {{ Str::limit($note->link_to_tutorial, 30) }}
+                                            {{ Str::limit($note->link_to_tutorial, 10) }}
                                         </a>
                                     </div>
                                 </td>

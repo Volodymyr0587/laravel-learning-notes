@@ -144,7 +144,7 @@ class NoteController extends Controller
 
     public function trash()
     {
-        $notes = Note::onlyTrashed()->paginate(10);
+        $notes = auth()->user()->notes()->onlyTrashed()->paginate(10);
         return view('notes.trash', compact('notes'));
     }
 
@@ -152,11 +152,41 @@ class NoteController extends Controller
     {
         Gate::authorize('editNote', $note);
 
-        $note = Note::withTrashed()->findOrFail($note);
         $note->restore();
 
-        return redirect()->route('notes.trash')->with('success', 'Note restored');
+        return redirect()->route('notes.trash')->with('success', 'Record successfully restored');
     }
+
+    public function restoreAll()
+    {
+        auth()->user()->notes()->onlyTrashed()->restore();
+
+        return redirect()->route('notes.trash')->with('success', 'All records successfully restored');
+    }
+
+    public function forceDelete(Note $note)
+    {
+        Gate::authorize('editNote', $note);
+
+        $note->forceDelete();
+
+        return redirect()->route('notes.trash')->with('success', 'Record has been permanently deleted');
+    }
+
+    public function forceDeleteAll(Note $note)
+    {
+        // Retrieve all auth user trashed notes
+        $trashedNotes = auth()->user()->notes()->onlyTrashed()->get();
+
+        // Force delete each trashed note
+        foreach ($trashedNotes as $note) {
+            $note->forceDelete();
+        }
+
+        return redirect()->route('notes.trash')->with('success', 'All records are permanently deleted');
+    }
+
+
 
     protected function handleImageUpload($request)
     {

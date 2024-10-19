@@ -25,7 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::get('/trash', [NoteController::class, 'trash'])->name('notes.trash');
-    Route::patch('/restore/{id}', [NoteController::class, 'restore'])->name('notes.restore');
+    Route::post('/restore/{note}', [NoteController::class, 'restore'])->withTrashed()->name('notes.restore');
+    Route::post('/restore-all', [NoteController::class, 'restoreAll'])->withTrashed()->name('notes.restore-all');
+    Route::delete('/force-delete/{note}', [NoteController::class, 'forceDelete'])->withTrashed()->name('notes.force-delete');
+    Route::delete('/force-delete-all', [NoteController::class, 'forceDeleteAll'])->name('notes.forceDeleteAll');
 });
 
 require __DIR__ . '/auth.php';
