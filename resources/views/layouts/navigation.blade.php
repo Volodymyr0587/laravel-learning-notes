@@ -17,15 +17,19 @@
                     </x-nav-link>
                     <x-nav-link :href="route('notes.index')" :active="request()->routeIs('notes.index')">
                         {{ __('Notes') }}
+                        <x-badges.nav-badge  :count="$notesCount"/>
                     </x-nav-link>
                     <x-nav-link :href="route('resource-types.index')" :active="request()->routeIs('resource-types.index')">
                         {{ __('Resource types') }}
+                        <x-badges.nav-badge  :count="$resourceTypesCount"/>
                     </x-nav-link>
                     <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
                         {{ __('Categories') }}
+                        <x-badges.nav-badge  :count="$categoriesCount"/>
                     </x-nav-link>
                     <x-nav-link :href="route('notes.trash')" :active="request()->routeIs('notes.trash')">
                         {{ __('Trash') }}
+                        <x-badges.nav-badge bgcolor="red" :count="$trashNotesCount"/>
                     </x-nav-link>
                 </div>
             </div>
@@ -83,16 +87,16 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('notes.index')" :active="request()->routeIs('notes.index')">
-                {{ __('Notes') }}
+                {{ __('Notes') }} {{ $notesCount }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('resource-types.index')" :active="request()->routeIs('resource-types.index')">
-                {{ __('Resource types') }}
+                {{ __('Resource types') }} {{ $resourceTypesCount }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
-                {{ __('Categories') }}
+                {{ __('Categories') }} {{ $categoriesCount }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('notes.trash')" :active="request()->routeIs('notes.trash')">
-                {{ __('Trash') }}
+                {{ __('Trash') }} {{ $trashNotesCount }}
             </x-responsive-nav-link>
         </div>
 
