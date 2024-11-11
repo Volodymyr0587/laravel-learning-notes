@@ -51,7 +51,9 @@ class CategoryController extends Controller
     {
         Gate::authorize('editCategory', $category);
 
-        return view('categories.edit', compact('category'));
+        $relatedNotes = $category->notes()->paginate(2);
+
+        return view('categories.edit', compact('category', 'relatedNotes'));
     }
 
     /**
