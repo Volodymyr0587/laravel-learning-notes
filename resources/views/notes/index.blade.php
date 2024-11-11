@@ -251,57 +251,7 @@
                 </div>
                 {{-- END TABLE --}}
                 {{-- PAGINATION --}}
-                <div class="flex items-center justify-between pb-6 px-4">
-                    {{-- Previous Page Button --}}
-                    @if ($notes->onFirstPage())
-                        <button
-                            class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            disabled>
-                            Previous
-                        </button>
-                    @else
-                        <a href="{{ $notes->previousPageUrl() }}"
-                            class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75">
-                            Previous
-                        </a>
-                    @endif
-
-                    {{-- Page Numbers --}}
-                    <div class="flex items-center gap-2">
-                        @foreach(range(1, $notes->lastPage()) as $page)
-                            @if ($page == $notes->currentPage())
-                                <button
-                                    class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg border border-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                                    disabled>
-                                    <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                                        {{ $page }}
-                                    </span>
-                                </button>
-                            @else
-                                <a href="{{ $notes->url($page) }}"
-                                    class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10">
-                                    <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                                        {{ $page }}
-                                    </span>
-                                </a>
-                            @endif
-                        @endforeach
-                    </div>
-
-                    {{-- Next Page Button --}}
-                    @if ($notes->hasMorePages())
-                        <a href="{{ $notes->nextPageUrl() }}"
-                            class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all hover:opacity-75">
-                            Next
-                        </a>
-                    @else
-                        <button
-                            class="select-none rounded-lg border border-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-gray-900 transition-all disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            disabled>
-                            Next
-                        </button>
-                    @endif
-                </div>
+                <x-pagination :resource=$notes />
                 {{-- END PAGINATION --}}
             </div>
         </div>

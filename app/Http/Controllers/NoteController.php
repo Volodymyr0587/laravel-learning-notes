@@ -144,7 +144,7 @@ class NoteController extends Controller
 
     public function trash()
     {
-        $notes = auth()->user()->notes()->onlyTrashed()->paginate(10);
+        $notes = auth()->user()->notes()->onlyTrashed()->paginate(5);
         return view('notes.trash', compact('notes'));
     }
 
