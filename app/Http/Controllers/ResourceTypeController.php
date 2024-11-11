@@ -51,7 +51,9 @@ class ResourceTypeController extends Controller
     {
         Gate::authorize('editResourceType', $resourceType);
 
-        return view('resource_types.edit', compact('resourceType'));
+        $relatedNotes = $resourceType->notes()->paginate(2);
+
+        return view('resource_types.edit', compact('resourceType', 'relatedNotes'));
     }
 
     /**
