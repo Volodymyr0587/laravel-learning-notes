@@ -21,6 +21,7 @@ return new class extends Migration
 
 
             $table->string('title');
+            $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->string('link_to_tutorial');
             $table->string('link_to_resource')->nullable();

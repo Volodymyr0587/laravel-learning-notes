@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use Illuminate\Support\Str;
 use App\Models\ResourceType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
@@ -65,6 +66,12 @@ class Note extends Model
     protected static function boot()
     {
         parent::boot();
+
+        static::creating(function ($note) {
+            $slug = Str::slug($note->title);
+            $count = Note::where('slug', 'LIKE', "{$slug}%")->count();
+            $note->slug = $count ? "{$slug}-{$count}" : $slug;
+        });
 
         static::updating(function ($note) {
             if (request()->hasFile('image')) {
