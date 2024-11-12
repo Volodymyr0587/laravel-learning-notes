@@ -12,9 +12,21 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = auth()->user()->categories()->paginate(5);
+        $query = auth()->user()->categories();
+
+        $sortByName = $request->query('sortByName'); // Either 'asc' or 'desc'
+        $sortByDate = $request->query('sortByDate'); // Either 'asc' or 'desc'
+
+        if ($sortByName) {
+            $query->sortByName($sortByName);
+        } elseif ($sortByDate) {
+            $query->sortByDate($sortByDate);
+        }
+
+        $categories = $query->paginate(5)->withQueryString();
+
         return view('categories.index', compact('categories'));
     }
 

@@ -28,6 +28,6 @@ class ResourceType extends Model
 
     public function scopeSortByDate(Builder $query, $direction = 'asc')
     {
-        return $query->orderBy('created_at', $direction);
+        return $query->orderBy('updated_at', $direction);
     }
 }
