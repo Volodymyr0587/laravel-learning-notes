@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -89,7 +90,9 @@ class CategoryController extends Controller
         // Check if the category has related notes
         if ($category->notes()->exists()) {
             // Optionally handle reassignment or deletion of the related notes
-            return redirect()->back()->with('warning', 'This category has associated notes and cannot be deleted.');
+            $count = $category->notes()->count();
+            $message = "This category has $count associated " . Str::plural('note', $count) . " and cannot be deleted.";
+            return redirect()->back()->with('warning', $message);
         }
 
         $category->delete();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\ResourceType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -89,7 +90,9 @@ class ResourceTypeController extends Controller
         // Check if the resource type has related notes
         if ($resourceType->notes()->exists()) {
             // Optionally handle reassignment or deletion of the related notes
-            return redirect()->back()->with('warning', 'This resource type has associated notes and cannot be deleted.');
+            $count = $resourceType->notes()->count();
+            $message = "This resource type has $count associated " . Str::plural('note', $count) . " and cannot be deleted.";
+            return redirect()->back()->with('warning', $message);
         }
 
         $resourceType->delete();
