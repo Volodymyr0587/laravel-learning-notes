@@ -62,18 +62,30 @@ class Note extends Model
         return $query;
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Generate a unique slug for the note.
+     *
+     * @return void
+     */
+    protected function generateSlug()
+    {
+        $slug = Str::slug($this->title);
+        $count = static::where('slug', 'LIKE', "{$slug}%")->count();
+        $this->slug = $count ? "{$slug}-{$count}" : $slug;
+    }
 
     protected static function boot()
     {
         parent::boot();
 
-        static::creating(function ($note) {
-            $slug = Str::slug($note->title);
-            $count = Note::where('slug', 'LIKE', "{$slug}%")->count();
-            $note->slug = $count ? "{$slug}-{$count}" : $slug;
-        });
+        static::saving(function ($note) {
+            $note->generateSlug();
 
-        static::updating(function ($note) {
             if (request()->hasFile('image')) {
                 if ($note->getOriginal('image')) {
                     Storage::disk('public')->delete($note->getOriginal('image'));
