@@ -50,25 +50,25 @@
                                     <li role="tab"
                                         class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
                                         data-value="all">
-                                        <div class="z-20 text-inherit">
-                                            &nbsp;&nbsp;All&nbsp;&nbsp;
-                                        </div>
-                                        <div class="absolute inset-0 z-10 h-full bg-white rounded-md shadow">
-                                        </div>
+                                        <a href="{{ route('resource-types.index', ['sortByDate' => request('sortByDate') === 'asc' ? 'desc' : 'asc']) }}" class="z-20 text-inherit">
+                                            &nbsp;&nbsp;Date&nbsp;&uarr;&darr;&nbsp;&nbsp;
+                                        </a>
+                                        @if(request('sortByDate') === 'desc' || request('sortByDate') === 'asc')
+                                            <div class="absolute inset-0 z-10 h-full bg-white rounded-md shadow"></div>
+                                        @endif
                                     </li>
                                     <li role="tab"
                                         class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
                                         data-value="monitored">
-                                        <div class="z-20 text-inherit">
-                                            &nbsp;&nbsp;Monitored&nbsp;&nbsp;
-                                        </div>
-                                    </li>
-                                    <li role="tab"
-                                        class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
-                                        data-value="unmonitored">
-                                        <div class="z-20 text-inherit">
-                                            &nbsp;&nbsp;Unmonitored&nbsp;&nbsp;
-                                        </div>
+                                        <a href="{{ route('resource-types.index', ['sortByName' => request('sortByName') === 'asc' ? 'desc' : 'asc']) }}" class="z-20 text-inherit">
+                                            @php
+                                                $lettersOrder = request('sortByName') === 'asc' ? 'A-Z' : 'Z-A';
+                                            @endphp
+                                            &nbsp;&nbsp;{{ $lettersOrder }}&nbsp;&uarr;&darr;&nbsp;&nbsp;
+                                        </a>
+                                        @if(request('sortByName') === 'desc' || request('sortByName') === 'asc')
+                                            <div class="absolute inset-0 z-10 h-full bg-white rounded-md shadow"></div>
+                                        @endif
                                     </li>
                                 </ul>
                             </nav>

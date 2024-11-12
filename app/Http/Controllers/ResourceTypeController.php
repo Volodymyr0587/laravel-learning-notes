@@ -12,9 +12,21 @@ class ResourceTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $resourceTypes = auth()->user()->resourceTypes()->paginate(5);
+        $query = auth()->user()->resourceTypes();
+
+        $sortByName = $request->query('sortByName'); // Either 'asc' or 'desc'
+        $sortByDate = $request->query('sortByDate'); // Either 'asc' or 'desc'
+
+        if ($sortByName) {
+            $query->sortByName($sortByName);
+        } elseif ($sortByDate) {
+            $query->sortByDate($sortByDate);
+        }
+
+        $resourceTypes = $query->paginate(5)->withQueryString();
+
         return view('resource_types.index', compact('resourceTypes'));
     }
 
