@@ -30,7 +30,8 @@ class NoteController extends Controller
         // Apply search filter for title and description
         $query->searchByTitleDescription($searchTerm);
 
-        $notes = $query->select(['id', 'image', 'title', 'link_to_tutorial',  'resource_type_id', 'completed', 'updated_at'])
+        $notes = $query->with(['user', 'resourceType', 'categories'])
+            ->select(['id', 'image', 'title', 'slug', 'link_to_tutorial',  'resource_type_id', 'completed', 'updated_at'])
             ->latest()
             ->paginate(5)
             ->withQueryString();
