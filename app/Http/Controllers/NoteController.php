@@ -71,7 +71,7 @@ class NoteController extends Controller
             $note->categories()->attach($request->categories);
         }
 
-        return to_route('notes.index')->with('success', 'Note successfully created.');
+        return to_route('notes.index')->with('success', "Note $note->title successfully created");
 
     }
 
@@ -128,7 +128,7 @@ class NoteController extends Controller
             $note->categories()->sync($request->categories);
         }
 
-        return to_route('notes.index')->with('success', 'Note successfully updated.');
+        return to_route('notes.index')->with('success', "Note $note->title successfully updated");
     }
 
 
@@ -141,7 +141,7 @@ class NoteController extends Controller
 
         $note->delete();
 
-        return to_route('notes.index')->with('success', 'Note successfully deleted');
+        return to_route('notes.index')->with('success', "Note $note->title successfully deleted");
     }
 
     public function trash()
@@ -156,7 +156,7 @@ class NoteController extends Controller
 
         $note->restore();
 
-        return redirect()->route('notes.trash')->with('success', 'Note successfully restored');
+        return redirect()->route('notes.trash')->with('success', "Note $note->title successfully restored");
     }
 
     public function restoreAll()
@@ -170,9 +170,11 @@ class NoteController extends Controller
     {
         Gate::authorize('editNote', $note);
 
+        $title = $note->title;
+
         $note->forceDelete();
 
-        return redirect()->route('notes.trash')->with('success', 'Note has been permanently deleted');
+        return redirect()->route('notes.trash')->with('success', "Note $title has been permanently deleted");
     }
 
     public function forceDeleteAll(Note $note)
