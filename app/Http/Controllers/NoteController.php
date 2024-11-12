@@ -20,6 +20,7 @@ class NoteController extends Controller
         // Start building the query
         $query = auth()->user()->notes()
             ->with([
+                'user',
                 'categories:id,name',
                 'resourceType:id,name'
             ]);
@@ -30,8 +31,8 @@ class NoteController extends Controller
         // Apply search filter for title and description
         $query->searchByTitleDescription($searchTerm);
 
-        $notes = $query->with(['user', 'resourceType', 'categories'])
-            ->select(['id', 'image', 'title', 'slug', 'link_to_tutorial',  'resource_type_id', 'completed', 'updated_at'])
+        $notes = $query
+            ->select(['id', 'image', 'title', 'slug', 'link_to_tutorial', 'resource_type_id', 'completed', 'updated_at'])
             ->latest()
             ->paginate(5)
             ->withQueryString();
