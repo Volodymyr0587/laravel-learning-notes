@@ -77,7 +77,7 @@ class ResourceTypeController extends Controller
         // Check if the resource type has related notes
         if ($resourceType->notes()->exists()) {
             // Optionally handle reassignment or deletion of the related notes
-            return redirect()->back()->with('delete-resource-type-error', 'This resource type has associated notes and cannot be deleted.');
+            return redirect()->back()->with('warning', 'This resource type has associated notes and cannot be deleted.');
         }
 
         $resourceType->delete();

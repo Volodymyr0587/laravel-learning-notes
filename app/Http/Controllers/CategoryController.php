@@ -77,7 +77,7 @@ class CategoryController extends Controller
         // Check if the category has related notes
         if ($category->notes()->exists()) {
             // Optionally handle reassignment or deletion of the related notes
-            return redirect()->back()->with('delete-category-type-error', 'This category has associated notes and cannot be deleted.');
+            return redirect()->back()->with('warning', 'This category has associated notes and cannot be deleted.');
         }
 
         $category->delete();

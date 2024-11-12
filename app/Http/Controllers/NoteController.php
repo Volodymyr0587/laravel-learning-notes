@@ -71,7 +71,7 @@ class NoteController extends Controller
             $note->categories()->attach($request->categories);
         }
 
-        return to_route('notes.index')->with('success', 'Record successfully created.');
+        return to_route('notes.index')->with('success', 'Note successfully created.');
 
     }
 
@@ -128,7 +128,7 @@ class NoteController extends Controller
             $note->categories()->sync($request->categories);
         }
 
-        return to_route('notes.index')->with('success', 'Record successfully updated.');
+        return to_route('notes.index')->with('success', 'Note successfully updated.');
     }
 
 
@@ -141,7 +141,7 @@ class NoteController extends Controller
 
         $note->delete();
 
-        return to_route('notes.index')->with('success', 'Record successfully deleted');
+        return to_route('notes.index')->with('success', 'Note successfully deleted');
     }
 
     public function trash()
@@ -156,14 +156,14 @@ class NoteController extends Controller
 
         $note->restore();
 
-        return redirect()->route('notes.trash')->with('success', 'Record successfully restored');
+        return redirect()->route('notes.trash')->with('success', 'Note successfully restored');
     }
 
     public function restoreAll()
     {
         auth()->user()->notes()->onlyTrashed()->restore();
 
-        return redirect()->route('notes.trash')->with('success', 'All records successfully restored');
+        return redirect()->route('notes.trash')->with('success', 'All notes successfully restored');
     }
 
     public function forceDelete(Note $note)
@@ -172,7 +172,7 @@ class NoteController extends Controller
 
         $note->forceDelete();
 
-        return redirect()->route('notes.trash')->with('success', 'Record has been permanently deleted');
+        return redirect()->route('notes.trash')->with('success', 'Note has been permanently deleted');
     }
 
     public function forceDeleteAll(Note $note)
@@ -185,7 +185,7 @@ class NoteController extends Controller
             $note->forceDelete();
         }
 
-        return redirect()->route('notes.trash')->with('success', 'All records are permanently deleted');
+        return redirect()->route('notes.trash')->with('success', 'All notes are permanently deleted');
     }
 
 
