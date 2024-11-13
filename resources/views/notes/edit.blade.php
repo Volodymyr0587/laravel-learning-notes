@@ -225,6 +225,27 @@
                                             <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
                                         @enderror
                                     </div>
+
+                                    <div class="col-span-full">
+                                        <label for="images"
+                                            class="block text-sm font-medium leading-6 text-gray-900">Upload Images</label>
+                                        <div class="mt-2 flex items-center gap-x-3">
+                                            <input type="file" name="images[]" multiple id="images-input"
+                                                class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" />
+                                        </div>
+                                        @error('images')
+                                            <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
+                                        @enderror
+
+                                        <div class="my-2 flex items-center gap-x-3">
+                                            @forelse ($note->images as $image)
+                                                <img src="{{ asset('storage/' . $image->path) }}" class="w-20" alt="">
+                                            @empty
+
+                                            @endforelse
+                                        </div>
+                                        <div id="image-preview" class="mt-2 flex items-center gap-x-3"></div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -280,4 +301,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('images-input').addEventListener('change', function (event) {
+            const previewContainer = document.getElementById('image-preview');
+            previewContainer.innerHTML = '';
+            Array.from(event.target.files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.width = 100;
+                    previewContainer.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            });
+        });
+    </script>
+
 </x-app-layout>

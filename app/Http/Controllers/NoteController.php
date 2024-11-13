@@ -6,6 +6,7 @@ use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreNoteRequest;
+use Illuminate\Support\Facades\Storage;
 
 class NoteController extends Controller
 {
@@ -71,6 +72,8 @@ class NoteController extends Controller
             $note->categories()->attach($request->categories);
         }
 
+        $this->handleMultipleImagesUpload($request, $note);
+
         return to_route('notes.index')->with('success', "Note $note->title successfully created");
 
     }
@@ -127,6 +130,9 @@ class NoteController extends Controller
         if ($request->has('categories')) {
             $note->categories()->sync($request->categories);
         }
+
+        // Handle multiple images upload
+        $this->handleMultipleImagesUpload($request, $note);
 
         return to_route('notes.index')->with('success', "Note $note->title successfully updated");
     }
@@ -198,6 +204,31 @@ class NoteController extends Controller
             return $request->file('image')->store('notes', 'public');
         }
 
+        return null;
+    }
+
+    protected function handleMultipleImagesUpload($request, Note $note)
+    {
+        if ($request->hasFile('images')) {
+            // Validate images
+            $request->validate([
+                'images.*' => 'image|mimes:jpeg,png,jpg|max:2048'
+            ]);
+
+            // Optionally remove old images if desired
+            foreach ($note->images as $existingImage) {
+                // Delete image file from storage
+                Storage::disk('public')->delete($existingImage->path);
+                // Delete image record from the database
+                $existingImage->delete();
+            }
+
+            // Store and save new images
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('note_images', 'public');
+                $note->images()->create(['path' => $path]);
+            }
+        }
         return null;
     }
 
