@@ -104,6 +104,11 @@ class Note extends Model
             if ($note->image) {
                 Storage::disk('public')->delete($note->image);
             }
+            // Loop through each image and delete it
+            foreach ($note->images as $image) {
+                Storage::disk('public')->delete($image->path);
+                $image->delete();
+            }
         });
     }
 
