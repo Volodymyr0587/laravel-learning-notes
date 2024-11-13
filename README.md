@@ -54,7 +54,7 @@
 
 * ```use sqlite for simplicity```
 
-5. Run migrations
+5. Run migrations 
 
 * ```php artisan migrate```
 
@@ -68,3 +68,13 @@
 
 ## Usage
 Register a new user. Enjoy :) 
+
+Optionally, you can populate the database with test data:
+
+```php artisan migrate:fresh --seed ```
+
+ and log in with the following credentials:
+
+```email: test@example.com```
+
+```password: password123```
