@@ -224,6 +224,12 @@
                                         @error('image')
                                             <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
                                         @enderror
+
+                                        <div class="my-2 flex items-center gap-x-3">
+                                            @if ($note->image)
+                                                <img src="{{ asset('storage/' . $note->image) }}" class="w-30" alt="">
+                                            @endif
+                                        </div>
                                     </div>
 
                                     <div class="col-span-full">
