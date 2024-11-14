@@ -201,6 +201,11 @@
                                         @error('image')
                                             <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
                                         @enderror
+
+                                        <!-- Preview Image Container -->
+                                        <div id="cover-image-preview" class="mt-2 flex items-center gap-x-3">
+                                            <img id="preview-image" src="" alt="Cover Image Preview" class="hidden w-32 h-32 object-cover rounded-md">
+                                        </div>
                                     </div>
 
                                     <div class="col-span-full">
@@ -267,12 +272,31 @@
                 reader.onload = function (e) {
                     const img = document.createElement('img');
                     img.src = e.target.result;
-                    img.width = 100;
+                    img.classList = "w-32 h-32 object-cover rounded-md";
+                    // img.width = 100;
                     previewContainer.appendChild(img);
                 }
                 reader.readAsDataURL(file);
             });
         });
+
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0]; // Access the file correctly
+            const previewImage = document.getElementById('preview-image');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.classList.remove('hidden'); // Show the image preview
+                };
+                reader.readAsDataURL(file); // Read file as data URL
+            } else {
+                previewImage.src = '';
+                previewImage.classList.add('hidden'); // Hide the image preview if no file is selected
+            }
+        });
+
     </script>
 
 </x-app-layout>

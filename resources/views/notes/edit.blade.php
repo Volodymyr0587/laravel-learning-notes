@@ -225,10 +225,11 @@
                                             <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
                                         @enderror
 
-                                        <div class="my-2 flex items-center gap-x-3">
+                                        <div id="cover-image-preview" class="mt-2 flex items-center gap-x-3">
                                             @if ($note->image)
-                                                <img src="{{ asset('storage/' . $note->image) }}" class="w-30" alt="">
+                                                <img src="{{ asset('storage/' . $note->image) }}" class="w-32 h-32 object-cover rounded-md" alt="">
                                             @endif
+                                            <img id="preview-image" src="" alt="Cover Image Preview" class="hidden w-32 h-32 object-cover rounded-md">
                                         </div>
                                     </div>
 
@@ -245,7 +246,7 @@
 
                                         <div class="my-2 flex items-center gap-x-3">
                                             @forelse ($note->images as $image)
-                                                <img src="{{ asset('storage/' . $image->path) }}" class="w-20" alt="">
+                                                <img src="{{ asset('storage/' . $image->path) }}" class="w-32 h-32 object-cover rounded-md" alt="">
                                             @empty
 
                                             @endforelse
@@ -317,11 +318,29 @@
                 reader.onload = function (e) {
                     const img = document.createElement('img');
                     img.src = e.target.result;
-                    img.width = 100;
+                    // img.width = 100;
+                    img.classList = "w-32 h-32 object-cover rounded-md";
                     previewContainer.appendChild(img);
                 }
                 reader.readAsDataURL(file);
             });
+        });
+
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0]; // Access the file correctly
+            const previewImage = document.getElementById('preview-image');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.classList.remove('hidden'); // Show the image preview
+                };
+                reader.readAsDataURL(file); // Read file as data URL
+            } else {
+                previewImage.src = '';
+                previewImage.classList.add('hidden'); // Hide the image preview if no file is selected
+            }
         });
     </script>
 

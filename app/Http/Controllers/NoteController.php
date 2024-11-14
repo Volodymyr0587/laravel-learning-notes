@@ -215,7 +215,7 @@ class NoteController extends Controller
                 'images.*' => 'image|mimes:jpeg,png,jpg|max:2048'
             ]);
 
-            // Optionally remove old images if desired
+            // remove old images
             foreach ($note->images as $existingImage) {
                 // Delete image file from storage
                 Storage::disk('public')->delete($existingImage->path);
