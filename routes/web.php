@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ResourceTypeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ResourceTypeController;
 
 Route::get('/', function () {
     return view('welcome');
