@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :title="'Categories ' . ' - ' . config('app.name')">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ auth()->user()->name }}'s categories

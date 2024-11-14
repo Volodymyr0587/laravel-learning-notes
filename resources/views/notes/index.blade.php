@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout :title="'All Notes ' . ' - ' . config('app.name')">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ auth()->user()->name }}'s notes

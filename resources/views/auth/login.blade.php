@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout :title="'Log in - ' . config('app.name')">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
