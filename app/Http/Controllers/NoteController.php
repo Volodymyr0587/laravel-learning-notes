@@ -6,7 +6,6 @@ use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\StoreNoteRequest;
-use Illuminate\Support\Facades\Storage;
 
 class NoteController extends Controller
 {
@@ -214,14 +213,6 @@ class NoteController extends Controller
             $request->validate([
                 'images.*' => 'image|mimes:jpeg,png,jpg|max:2048'
             ]);
-
-            // remove old images
-            foreach ($note->images as $existingImage) {
-                // Delete image file from storage
-                Storage::disk('public')->delete($existingImage->path);
-                // Delete image record from the database
-                $existingImage->delete();
-            }
 
             // Store and save new images
             foreach ($request->file('images') as $image) {

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ResourceTypeController;
@@ -23,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('notes', NoteController::class);
     Route::resource('resource-types', ResourceTypeController::class);
     Route::resource('categories', CategoryController::class);
+
+    Route::delete('/images/{image}', [ImageController::class, 'destroy'])->name('images.destroy');
 
     Route::get('/trash', [NoteController::class, 'trash'])->name('notes.trash');
     Route::post('/restore/{note}', [NoteController::class, 'restore'])->withTrashed()->name('notes.restore');

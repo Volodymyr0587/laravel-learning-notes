@@ -98,13 +98,6 @@ class Note extends Model
                     Storage::disk('public')->delete($note->getOriginal('image'));
                 }
             }
-
-            if (request()->hasFile('images')) {
-                foreach ($note->images as $image) {
-                    Storage::disk('public')->delete($image->path);
-                    $image->delete();
-                }
-            }
         });
 
         static::forceDeleting(function ($note) {

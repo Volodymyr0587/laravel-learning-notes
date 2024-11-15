@@ -244,13 +244,13 @@
                                             <span class="text-sm font-bold text-red-500 mt-2">{{ $message }}</span>
                                         @enderror
 
-                                        <div class="my-2 flex items-center gap-x-3">
+                                        {{-- <div class="my-2 flex items-center gap-x-3">
                                             @forelse ($note->images as $image)
                                                 <img src="{{ asset('storage/' . $image->path) }}" class="w-32 h-32 object-cover rounded-md" alt="">
                                             @empty
 
                                             @endforelse
-                                        </div>
+                                        </div> --}}
                                         <div id="image-preview" class="mt-2 flex items-center gap-x-3"></div>
                                     </div>
                                 </div>
@@ -292,6 +292,34 @@
                             </div>
                         </div>
                     </form>
+
+                    <div class="space-y-12">
+
+                        <div class="border-b border-gray-900/10 pb-12">
+                            <h2 class="text-base font-semibold leading-7 text-gray-900">Note Images</h2>
+
+
+                            <div class="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-5">
+                                {{-- <div class="my-2 flex items-center gap-x-3"> --}}
+                                    @forelse ($note->images as $image)
+                                        <div>
+                                            <!-- Individual Delete Form for Image -->
+                                            <form action="{{ route('images.destroy', $image) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="flex select-none items-center gap-3 rounded-lg bg-red-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-900/10 transition-all hover:shadow-lg hover:shadow-red-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                            <img src="{{ asset('storage/' . $image->path) }}" class="w-32 h-32 object-cover rounded-md" alt="">
+                                        </div>
+                                    @empty
+                                        <p>No Images</p>
+                                    @endforelse
+                                {{-- </div> --}}
+                                <div id="image-preview" class="mt-2 flex items-center gap-x-3"></div>
+                            </div>
+                        </div>
 
                     <div class="-mt-8">
                         <form action="{{ route('notes.destroy', $note) }}" method="POST">
