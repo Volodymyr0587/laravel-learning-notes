@@ -303,15 +303,16 @@
                                 {{-- <div class="my-2 flex items-center gap-x-3"> --}}
                                     @forelse ($note->images as $image)
                                         <div>
+                                            <img src="{{ asset('storage/' . $image->path) }}" class="w-32 h-32 object-cover rounded-md" alt="">
                                             <!-- Individual Delete Form for Image -->
-                                            <form action="{{ route('images.destroy', $image) }}" method="POST" style="display: inline;">
+                                            <form action="{{ route('images.destroy', $image) }}" method="POST" class="inline" >
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="flex select-none items-center gap-3 rounded-lg bg-red-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-900/10 transition-all hover:shadow-lg hover:shadow-red-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                                                <button type="submit" onclick="return confirm('Are you sure?');"
+                                                    class="flex select-none items-center gap-3 rounded-lg bg-red-900 py-2 px-4 mt-2 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-900/10 transition-all hover:shadow-lg hover:shadow-red-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                                                     Delete
                                                 </button>
                                             </form>
-                                            <img src="{{ asset('storage/' . $image->path) }}" class="w-32 h-32 object-cover rounded-md" alt="">
                                         </div>
                                     @empty
                                         <p>No Images</p>
