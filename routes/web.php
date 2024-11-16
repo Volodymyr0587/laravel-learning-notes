@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NoteExportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ImageController;
@@ -26,6 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
 
     Route::delete('/images/{image}', [ImageController::class, 'destroy'])->name('images.destroy');
+
+    Route::get('notes/export/{note}', NoteExportController::class)->name('notes.export');
 
     Route::get('/trash', [NoteController::class, 'trash'])->name('notes.trash');
     Route::post('/restore/{note}', [NoteController::class, 'restore'])->withTrashed()->name('notes.restore');
