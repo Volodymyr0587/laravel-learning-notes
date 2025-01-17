@@ -3,6 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ auth()->user()->name }}'s notes
         </h2>
+        <div>{{ getRandomQuote() }}</div>
     </x-slot>
 
     <div class="py-12">
