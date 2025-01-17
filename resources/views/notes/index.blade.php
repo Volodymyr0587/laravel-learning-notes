@@ -3,7 +3,12 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ auth()->user()->name }}'s notes
         </h2>
-        <div>{{ getRandomQuote() }}</div>
+        <div>
+            @php
+                $quote = getRandomQuote()
+            @endphp
+            {{ $quote['quote'] }} - <i>{{ $quote['author'] }}</i>
+        </div>
     </x-slot>
 
     <div class="py-12">
