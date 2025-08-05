@@ -31,7 +31,7 @@
                             </h5>
                             <p
                                 class="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
-                                See information about all notes
+                                See information about {{  request('completed') ? 'completed' : (request('completed') === '0' ? 'in progress' : 'all') }}  notes
                             </p>
                         </div>
                         <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
