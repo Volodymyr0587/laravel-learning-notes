@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        view()->composer(['layouts.navigation'], function ($view) {
+        view()->composer(['layouts.navigation', 'dashboard'], function ($view) {
             if (Auth::check()) {
                 $notesCount = Auth::user()->notes()->count();
                 $trashNotesCount = Auth::user()->notes()->onlyTrashed()->count();
